@@ -181,7 +181,11 @@ const translations = {
     buttonUpdate: "更新元件",
     buttonUpdating: "更新中...",
     buttonDelete: "删除元件",
+    warehouseDelete: "删除仓库",
+    warehouseDeleteConfirm: "确定要删除仓库「{name}」吗？",
     buttonDeleting: "删除中...",
+
+
     toastSuccess: "成功",
     toastError: "错误",
     toastAdded: "元件添加成功",

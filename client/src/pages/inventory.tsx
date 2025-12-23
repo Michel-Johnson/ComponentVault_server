@@ -12,6 +12,8 @@ import AppLayout from "@/components/layout";
 import { useTranslation } from "@/lib/i18n";
 import { apiRequest } from "@/lib/queryClient";
 
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+
 export default function Inventory() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All Categories");
@@ -22,6 +24,7 @@ export default function Inventory() {
   const [warehouseType, setWarehouseType] = useState<"personal" | "group">("personal");
   const [selectedGroupId, setSelectedGroupId] = useState<string | undefined>(undefined);
   const [renameValue, setRenameValue] = useState("");
+  const [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false);
   const t = useTranslation();
   const queryClient = useQueryClient();
   const formatCategory = (category: string) => t(`category_${category.replace(/\s+/g, "")}` as any);
@@ -93,6 +96,27 @@ export default function Inventory() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/warehouses"] });
+    }
+  });
+
+  const deleteWarehouse = useMutation({
+    mutationFn: async () => {
+      if (!selectedWarehouseId) return;
+      await apiRequest("DELETE", `/api/warehouses/${selectedWarehouseId}`);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/warehouses"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/components"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/stats"] });
+      // 如果删除的是当前选中的仓库，选择第一个可用的仓库
+      const remainingWarehouses = warehouses.filter(w => w.id !== selectedWarehouseId);
+      if (remainingWarehouses.length > 0) {
+        setSelectedWarehouseId(remainingWarehouses[0].id);
+        setRenameValue(remainingWarehouses[0].name);
+      } else {
+        setSelectedWarehouseId(undefined);
+        setRenameValue("");
+      }
     }
   });
 
@@ -222,9 +246,16 @@ export default function Inventory() {
               <p className="text-sm text-muted-foreground mb-1">{t("warehouseRename")}</p>
               <Input value={renameValue} onChange={(e) => setRenameValue(e.target.value)} />
             </div>
-            <div className="flex items-end">
+            <div className="flex items-end gap-2">
               <Button variant="outline" onClick={() => renameWarehouse.mutate()} disabled={renameWarehouse.isPending}>
                 {t("buttonSave")}
+              </Button>
+              <Button
+                variant="destructive"
+                onClick={() => setConfirmDeleteOpen(true)}
+                disabled={deleteWarehouse.isPending}
+              >
+                {deleteWarehouse.isPending ? t("buttonDeleting", { defaultValue: "Deleting..." }) : t("warehouseDelete")}
               </Button>
             </div>
           </div>
@@ -232,6 +263,29 @@ export default function Inventory() {
       </div>
 
       <ComponentsTable components={components} isLoading={isLoading} />
+
+      {/* 删除仓库确认弹窗 */}
+      <Dialog open={confirmDeleteOpen} onOpenChange={setConfirmDeleteOpen}>
+        <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle>{t("warehouseDelete")}</DialogTitle>
+            <DialogDescription>
+              {t("warehouseDeleteConfirm", { name: renameValue })}
+            </DialogDescription>
+          </DialogHeader>
+          <div className="flex justify-end gap-3 mt-4">
+            <Button variant="outline" onClick={() => setConfirmDeleteOpen(false)}>
+              {t("buttonCancel")}
+            </Button>
+            <Button variant="destructive" onClick={() => {
+              setConfirmDeleteOpen(false);
+              deleteWarehouse.mutate();
+            }} disabled={deleteWarehouse.isPending}>
+              {deleteWarehouse.isPending ? t("buttonDeleting", { defaultValue: "Deleting..." }) : t("warehouseDelete")}
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
 
       {/* Low Stock Alert */}
       {showLowStockAlert && lowStockComponents.length > 0 && (

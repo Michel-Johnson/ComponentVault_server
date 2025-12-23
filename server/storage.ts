@@ -33,6 +33,7 @@ export interface IStorage {
   createWarehouse(warehouse: any): Promise<any>;
   updateWarehouse(id: string, updates: any): Promise<any | undefined>;
   getWarehouse(id: string): Promise<any | undefined>;
+  deleteWarehouse(id: string): Promise<boolean>;
 }
 
 export class FileStorage implements IStorage {
@@ -427,6 +428,15 @@ export class FileStorage implements IStorage {
     await this.ensureInitialized();
     return this.warehouses.get(id);
   }
+
+  async deleteWarehouse(id: string): Promise<boolean> {
+    await this.ensureInitialized();
+    const result = this.warehouses.delete(id);
+    if (result) {
+      await this.saveWarehouses();
+    }
+    return result;
+  }
 }
 
 export class MemStorage implements IStorage {
@@ -651,6 +661,10 @@ export class MemStorage implements IStorage {
 
   async getWarehouse(id: string): Promise<any | undefined> {
     return this.warehouses.get(id);
+  }
+
+  async deleteWarehouse(id: string): Promise<boolean> {
+    return this.warehouses.delete(id);
   }
 }
 

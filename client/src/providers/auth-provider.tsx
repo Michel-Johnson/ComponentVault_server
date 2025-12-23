@@ -53,7 +53,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const logout = async () => {
     await apiRequest("POST", "/api/logout");
     setUser(null);
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('ev-language');
+    }
+    if (window?.location?.href && !window.location.href.endsWith('/login')) {
+      window.location.href = '/login'; // 强制跳转并刷新页面
+    }
   };
+
 
   return (
     <AuthContext.Provider value={{ user, loading, login, logout, refresh }}>

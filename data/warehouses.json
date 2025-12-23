@@ -1,48 +1,34 @@
 [
   {
-    "name": "My Warehouse",
-    "ownerId": "3ff4227d-935b-44ff-8e0b-9c0b40b93fca",
-    "groupIds": [],
-    "id": "3cc86142-22cf-43df-88c1-0a5579336ef7"
-  },
-  {
-    "name": "我的仓库",
-    "ownerId": "3ff4227d-935b-44ff-8e0b-9c0b40b93fca",
-    "groupIds": [
-      "5d563862-4c04-4686-9794-ebf8149af97c"
-    ],
-    "id": "92967a3c-0085-4454-893d-9d4ca4318a11"
-  },
-  {
-    "name": "我的仓库",
-    "ownerId": "e5f97ec3-2208-4b92-af32-c9a3a69284c6",
-    "groupIds": [
-      "5d563862-4c04-4686-9794-ebf8149af97c"
-    ],
-    "id": "0b767e7d-b01f-4417-a109-420c1657c551"
-  },
-  {
-    "name": "我的仓库",
-    "ownerId": "e5f97ec3-2208-4b92-af32-c9a3a69284c6",
-    "groupIds": [
-      "5d563862-4c04-4686-9794-ebf8149af97c"
-    ],
-    "id": "bec1f3c7-18aa-4ba0-8c80-0004316c3b15"
-  },
-  {
-    "name": "我的仓库",
-    "ownerId": "e5f97ec3-2208-4b92-af32-c9a3a69284c6",
-    "groupIds": [
-      "5d563862-4c04-4686-9794-ebf8149af97c"
-    ],
-    "id": "f91e52f2-2b5d-4d6d-a097-825dd350ccf2"
-  },
-  {
-    "name": "x",
+    "name": "测试版",
     "ownerId": "bf8d3880-1566-41c5-827b-caeaa76f4228",
     "groupIds": [],
     "type": "group",
     "warehouseGroupId": "5d563862-4c04-4686-9794-ebf8149af97c",
     "id": "cd3ed04b-c9ce-4c1c-9d44-f203cc6fe2c6"
+  },
+  {
+    "name": "michel",
+    "ownerId": "bf8d3880-1566-41c5-827b-caeaa76f4228",
+    "groupIds": [],
+    "type": "personal",
+    "warehouseGroupId": null,
+    "id": "3e0fd994-69e3-4cc9-971f-362a1f5cae26"
+  },
+  {
+    "name": "your_warehouse",
+    "ownerId": "70ce8132-f647-4961-8760-b014b3335699",
+    "groupIds": [],
+    "type": "personal",
+    "warehouseGroupId": null,
+    "id": "f1360a4a-5754-4349-b442-4ff8a1ceef1b"
+  },
+  {
+    "name": "your_warehouse",
+    "ownerId": "88ae66cc-1f9f-4bb9-8f86-fb70268d55f8",
+    "groupIds": [],
+    "type": "personal",
+    "warehouseGroupId": null,
+    "id": "c4e22013-be72-435e-a89b-5137cb4bdcb0"
   }
 ]

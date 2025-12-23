@@ -492,6 +492,31 @@ export async function registerRoutes(app: Express): Promise<Server> {
     res.json(updated);
   });
 
+  app.delete("/api/warehouses/:id", async (req, res) => {
+    const user = req.session?.user;
+    if (!user) return res.status(401).json({ error: "Unauthorized" });
+
+    const existing = (await storage.listWarehouses()).find((w) => w.id === req.params.id);
+    if (!existing) return res.status(404).json({ error: "Warehouse not found" });
+
+    // 只有仓库所有者才能删除仓库
+    if (existing.ownerId !== user.id && user.role !== "admin") {
+      return res.status(403).json({ error: "Forbidden: Only warehouse owner can delete the warehouse" });
+    }
+
+    // 允许删除非空仓库，并将所有关联元件的 warehouseId 设置为 null
+    const components = await storage.getComponents();
+    const toOrphan = components.filter((c) => c.warehouseId === req.params.id);
+    for (const c of toOrphan) {
+      await storage.updateComponent(c.id, { warehouseId: null });
+    }
+
+    const deleted = await storage.deleteWarehouse(req.params.id);
+    if (!deleted) return res.status(404).json({ error: "Warehouse not found" });
+
+    res.status(204).end();
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }
