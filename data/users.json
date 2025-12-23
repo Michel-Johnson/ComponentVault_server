@@ -1,0 +1,27 @@
+[
+  {
+    "username": "michel",
+    "password": "123456",
+    "role": "admin",
+    "groups": [
+      "5d563862-4c04-4686-9794-ebf8149af97c"
+    ],
+    "id": "bf8d3880-1566-41c5-827b-caeaa76f4228"
+  },
+  {
+    "username": "user1",
+    "password": "123456",
+    "role": "user",
+    "groups": [
+      "5d563862-4c04-4686-9794-ebf8149af97c"
+    ],
+    "id": "e5f97ec3-2208-4b92-af32-c9a3a69284c6"
+  },
+  {
+    "username": "user2",
+    "password": "123456",
+    "role": "user",
+    "groups": [],
+    "id": "cd8ee820-7098-4afa-8c35-8a4bafd6390e"
+  }
+]

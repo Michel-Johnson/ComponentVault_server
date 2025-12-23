@@ -1,0 +1,48 @@
+[
+  {
+    "name": "My Warehouse",
+    "ownerId": "3ff4227d-935b-44ff-8e0b-9c0b40b93fca",
+    "groupIds": [],
+    "id": "3cc86142-22cf-43df-88c1-0a5579336ef7"
+  },
+  {
+    "name": "我的仓库",
+    "ownerId": "3ff4227d-935b-44ff-8e0b-9c0b40b93fca",
+    "groupIds": [
+      "5d563862-4c04-4686-9794-ebf8149af97c"
+    ],
+    "id": "92967a3c-0085-4454-893d-9d4ca4318a11"
+  },
+  {
+    "name": "我的仓库",
+    "ownerId": "e5f97ec3-2208-4b92-af32-c9a3a69284c6",
+    "groupIds": [
+      "5d563862-4c04-4686-9794-ebf8149af97c"
+    ],
+    "id": "0b767e7d-b01f-4417-a109-420c1657c551"
+  },
+  {
+    "name": "我的仓库",
+    "ownerId": "e5f97ec3-2208-4b92-af32-c9a3a69284c6",
+    "groupIds": [
+      "5d563862-4c04-4686-9794-ebf8149af97c"
+    ],
+    "id": "bec1f3c7-18aa-4ba0-8c80-0004316c3b15"
+  },
+  {
+    "name": "我的仓库",
+    "ownerId": "e5f97ec3-2208-4b92-af32-c9a3a69284c6",
+    "groupIds": [
+      "5d563862-4c04-4686-9794-ebf8149af97c"
+    ],
+    "id": "f91e52f2-2b5d-4d6d-a097-825dd350ccf2"
+  },
+  {
+    "name": "x",
+    "ownerId": "bf8d3880-1566-41c5-827b-caeaa76f4228",
+    "groupIds": [],
+    "type": "group",
+    "warehouseGroupId": "5d563862-4c04-4686-9794-ebf8149af97c",
+    "id": "cd3ed04b-c9ce-4c1c-9d44-f203cc6fe2c6"
+  }
+]
